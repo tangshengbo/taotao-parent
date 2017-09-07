@@ -6,7 +6,9 @@ import com.taotao.pojo.TbItemParamItem;
 
 public interface ItemService {
 
-	TbItem getItemById(long itemId) ;
-	TbItemDesc getItemDescById(long itemId);
-	TbItemParamItem getItemParamById(long itemId);
+    TbItem getItemById(long itemId);
+
+    TbItemDesc getItemDescById(long itemId);
+
+    TbItemParamItem getItemParamById(long itemId);
 }
