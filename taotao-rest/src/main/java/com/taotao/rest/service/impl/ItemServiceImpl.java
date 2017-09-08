@@ -1,12 +1,5 @@
 package com.taotao.rest.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
@@ -18,8 +11,12 @@ import com.taotao.pojo.TbItemParamItemExample;
 import com.taotao.pojo.TbItemParamItemExample.Criteria;
 import com.taotao.rest.dao.JedisClient;
 import com.taotao.rest.service.ItemService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-import redis.clients.jedis.Jedis;
+import java.util.List;
 
 /**
  * 商品信息服务

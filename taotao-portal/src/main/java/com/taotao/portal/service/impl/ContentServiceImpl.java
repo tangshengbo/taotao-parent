@@ -1,14 +1,13 @@
 package com.taotao.portal.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.HttpClientUtil;
 import com.taotao.pojo.TbContent;
 import com.taotao.portal.service.ContentService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -22,6 +21,7 @@ public class ContentServiceImpl implements ContentService {
 	public List<TbContent> getContentList(long categoryId) {
 		//调用服务层的服务
 		String resStr = HttpClientUtil.doGet(SERVICE_BASE_URL + INDEX_AD1_URL + categoryId);
+		System.out.println(SERVICE_BASE_URL + INDEX_AD1_URL + categoryId);
 		//把字符串转换成java对象
 		TaotaoResult result = TaotaoResult.formatToList(resStr, TbContent.class);
 		if (result.getStatus() == 200) {

@@ -1,18 +1,21 @@
 package com.taotao.rest.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample;
 import com.taotao.pojo.TbItemCatExample.Criteria;
+import com.taotao.rest.dao.JedisClient;
 import com.taotao.rest.pojo.ItemCatNode;
 import com.taotao.rest.pojo.ItemCatResult;
 import com.taotao.rest.service.ItemCatService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 商品分类列表查询
@@ -28,12 +31,26 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
-	
+
+	@Autowired
+	private JedisClient jedisClient;
+
+	@Value("${REDIS_CONTENT_KEY}")
+	private String REDIS_CONTENT_KEY;
+
 	@Override
 	public ItemCatResult getItemCatList() {
-		
 		ItemCatResult result = new ItemCatResult();
-		result.setData(getList(0));
+		String cacheData = jedisClient.hget(REDIS_CONTENT_KEY, "catList");
+		List<ItemCatNode> nodes;
+		if (StringUtils.isNotBlank(cacheData)) {
+			nodes = JsonUtils.jsonToList(cacheData, ItemCatNode.class);
+			result.setData(nodes);
+			return result;
+		}
+		nodes = (List<ItemCatNode>)getList(0);
+		jedisClient.hset(REDIS_CONTENT_KEY, "catList", JsonUtils.objectToJson(nodes));
+		result.setData(nodes);
 		return result;
 	}
 	
