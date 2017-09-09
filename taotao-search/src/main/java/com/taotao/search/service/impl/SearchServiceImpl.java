@@ -19,8 +19,8 @@ public class SearchServiceImpl implements SearchService {
 		//创建查询对象
 		SolrQuery solrQuery = new SolrQuery();
 		//设置查询条件
-		//solrQuery.set("q","");
-		solrQuery.setQuery(queryString);
+//		solrQuery.set("q","");
+		solrQuery.setQuery("id:" + queryString);
 		//设置分页
 		solrQuery.setStart((int) ((page - 1) * pageSize));
 		solrQuery.setRows(pageSize.intValue());

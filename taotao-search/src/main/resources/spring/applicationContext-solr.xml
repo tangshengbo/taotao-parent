@@ -11,7 +11,7 @@
 	<!-- 配置solrServer对象 -->
 	<!-- 单机版 -->
 	<bean id="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-		<constructor-arg name="baseURL" value="http://localhost:8072/solr"></constructor-arg>
+		<constructor-arg name="baseURL" value="http://localhost:8083/solr"></constructor-arg>
 	</bean>
 	<!-- 集群版配置 -->
 	<!--<bean id="solrServer" class="org.apache.solr.client.solrj.impl.CloudSolrServer">-->

@@ -1,5 +1,6 @@
 package com.taotao.portal.controller;
 
+import com.taotao.common.emum.HttpStatus;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.portal.pojo.Item;
 import com.taotao.portal.service.CartService;
@@ -44,7 +45,7 @@ public class CartController {
 	public String addCartItem(@PathVariable Long itemId, Integer itemNum,
 			HttpServletRequest request, HttpServletResponse response) {
 		TaotaoResult result = cartService.addCartItem(itemId, itemNum, request, response);
-		if (result.getStatus() == 200) {
+		if (result.getStatus() == HttpStatus.OK.getCode()) {
 			return "cart-success";
 		}
 		return "error/exception";
